@@ -1,7 +1,7 @@
 interface SelectProps {
   label: string;
   options: Array<{ value: string; text: string }>;
-  onChange: any;
+  onChange: (value: string) => void;
 }
 
 const Select: React.FC<SelectProps> = ({ label, options, onChange }) => {

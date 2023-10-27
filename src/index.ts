@@ -7,7 +7,7 @@ const store = new Store();
 // plugin that tells the Electron app where to look for the Webpack-bundled app code (depending on
 // whether you're running in development or production).
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
-declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+// declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -30,7 +30,7 @@ const createWindow = (): void => {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // TODO: move to another file?
   ipcMain.handle('save-favorite', (event, factId, text) => {
@@ -47,14 +47,14 @@ const createWindow = (): void => {
     store.set('favorites', favorites);
   });
 
-  ipcMain.handle('get-favorite', (event) => {
+  ipcMain.handle('get-favorite', () => {
     const favorites =
       (store.get('favorites') as Array<{ id: string; text: string }>) || [];
     return favorites;
   });
 
   // for test
-  ipcMain.handle('remove-favorite', (event) => {
+  ipcMain.handle('remove-favorite', () => {
     store.delete('favorites');
   });
 };

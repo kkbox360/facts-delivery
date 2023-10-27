@@ -2,14 +2,12 @@ import { deleteFavorite } from '../lib/ipc';
 import useGetFavorites from '../hooks/useGetFavorites';
 import Fact from '../components/Fact';
 
-interface FavoriteProps {}
-
-const Favorite: React.FC<FavoriteProps> = ({}) => {
+const Favorite = () => {
   const { facts, setFacts, isLoading } = useGetFavorites();
 
   const deleteHandle = (factId: string) => {
     setFacts(facts.filter((f) => f.id != factId));
-    // deleteFavorite(factId);
+    deleteFavorite(factId);
   };
 
   return (

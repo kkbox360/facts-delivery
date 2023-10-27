@@ -1,7 +1,10 @@
-export async function getFacts(type: string = 'cat', amount: number = 1) {
+export async function getFacts(url) {
   try {
     const res = await fetch(
-      `https://cat-fact.herokuapp.com/facts/random?animal_type=${type}&amount=${amount}`
+      url
+      // `https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=1`
+      // `https://www.boredapi.com/api/activity`
+      // `https://official-joke-api.appspot.com/random_joke`
     );
     const facts = await res.json();
     return Array.isArray(facts) ? facts : [facts];

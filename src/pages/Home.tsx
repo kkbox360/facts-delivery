@@ -3,11 +3,27 @@ import Fact from '../components/Fact';
 import useFetchFacts from '../hooks/useFetchFacts';
 import usePeriodJobs from '../hooks/usePeriodJobs';
 import { saveFavorite } from '../lib/ipc';
+import { notify } from '../lib/notification';
 
-interface HomeProps {}
-
-const Home: React.FC<HomeProps> = ({}) => {
-  const { facts, isLoading, forceReload } = useFetchFacts();
+const Home = () => {
+  const apiUrl = 'https://official-joke-api.appspot.com/random_joke';
+  const customNotify = (item: [{ setup: string }]) => {
+    item[0] && notify('New feed!', item[0].setup);
+  };
+  const postHandle = (res: object[]) => {
+    return res.map(
+      (item: { id: string; setup: string; punchline: string }) => ({
+        id: String(item.id),
+        text: `${item.setup} ${item.punchline}`,
+        setup: item.setup,
+      })
+    );
+  };
+  const { facts, isLoading, forceReload } = useFetchFacts(
+    apiUrl,
+    postHandle,
+    customNotify
+  );
   const periodJob = forceReload;
   const options = [
     { value: '5', text: 'Every 5 minutes' },
@@ -17,8 +33,8 @@ const Home: React.FC<HomeProps> = ({}) => {
     { value: '20000', text: 'Every 20000 minutes' },
   ];
   const { setPeriod } = usePeriodJobs(options[0].value, periodJob);
-  const favoriteHandle = (fact: { _id: string; text: string }) => {
-    saveFavorite(fact._id, fact.text);
+  const favoriteHandle = (fact: { id: string; text: string }) => {
+    saveFavorite(fact.id, fact.text);
     forceReload();
   };
   const deleteHandle = forceReload;

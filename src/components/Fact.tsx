@@ -1,10 +1,10 @@
 interface FactProps {
-  facts: any;
+  facts: Array<{ id: string; text: string }>;
   isLoading: boolean;
   showFavorite: boolean;
   showDelete: boolean;
-  favoriteHandle?: any;
-  deleteHandle?: any;
+  favoriteHandle?: (fact: object) => void;
+  deleteHandle?: () => void;
 }
 
 const Fact: React.FC<FactProps> = ({
@@ -19,12 +19,12 @@ const Fact: React.FC<FactProps> = ({
     <div className='bg-gray-700 w-[80%] flex min-h-min relative rounded-lg my-1 group'>
       <p className='p-3 text-gray-300'>
         {isLoading
-          ? 'Loading'
+          ? 'Loading...'
           : facts[0]
           ? facts[0].text
           : 'Something went wrong.'}
       </p>
-      {!isLoading && showFavorite ? (
+      {!isLoading && facts[0] && showFavorite ? (
         <button
           onClick={() => favoriteHandle(facts[0])}
           className='invisible bg-white group-hover:visible hover:bg-red-400 p-4 w-14 h-14 absolute top-[50%] translate-y-[-50%] right-[8rem] rounded-full'
@@ -32,7 +32,7 @@ const Fact: React.FC<FactProps> = ({
           ♥
         </button>
       ) : null}
-      {!isLoading && showDelete ? (
+      {!isLoading && facts[0] && showDelete ? (
         <button
           onClick={deleteHandle}
           className='invisible bg-white group-hover:visible hover:bg-red-400 p-4 w-14 h-14 absolute top-[50%] translate-y-[-50%] right-[3rem] rounded-full'

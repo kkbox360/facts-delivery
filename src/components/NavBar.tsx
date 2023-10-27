@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom';
 
-interface NavBarProps {}
+interface NavBarProps {
+  bars: Array<{ to: string; label: string }>;
+}
 
 const navClassHandle = ({ isActive }: { isActive: boolean }) =>
   [
@@ -10,19 +12,16 @@ const navClassHandle = ({ isActive }: { isActive: boolean }) =>
     `${isActive ? 'rounded-b-full' : ''}`,
   ].join(' ');
 
-const NavBar: React.FC<NavBarProps> = ({}) => {
+const NavBar: React.FC<NavBarProps> = ({ bars }) => {
   return (
     <div className='flex bg-gray-500 px-[2.5rem]'>
-      <NavLink to='/' className={navClassHandle}>
-        <div className='h-full w-full flex items-center justify-center text-gray-300'>
-          Cat Fact
-        </div>
-      </NavLink>
-      <NavLink to='/favorite' className={navClassHandle}>
-        <div className='h-full w-full flex items-center justify-center text-gray-300'>
-          Favorites
-        </div>
-      </NavLink>
+      {bars.map((bar) => (
+        <NavLink key={bar.label} to={bar.to} className={navClassHandle}>
+          <div className='h-full w-full flex items-center justify-center text-gray-300'>
+            {bar.label}
+          </div>
+        </NavLink>
+      ))}
     </div>
   );
 };

@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 
-const usePeriodJobs = (defaultPeriod: number | string = 5000, func: any) => {
+const usePeriodJobs = (
+  defaultPeriod: number | string = 5000,
+  func: () => void
+) => {
   const [period, setPeriod] = useState(defaultPeriod);
 
   useEffect(() => {
