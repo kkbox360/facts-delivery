@@ -3,12 +3,14 @@
   "productName": "Facts Delivery",
   "version": "1.0.0",
   "description": "My Electron application description",
-  "main": ".webpack/main",
+  "main": ".webpack/main/index.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
+    "buildw": "npx electron-builder -w",
+    "buildm": "npx electron-builder -m",
     "lint": "eslint --ext .ts,.tsx ."
   },
   "keywords": [],
@@ -35,6 +37,7 @@
     "babel-loader": "^9.1.3",
     "css-loader": "^6.0.0",
     "electron": "27.0.2",
+    "electron-builder": "^24.6.4",
     "eslint": "^8.0.1",
     "eslint-plugin-import": "^2.25.0",
     "fork-ts-checker-webpack-plugin": "^7.2.13",
@@ -52,5 +55,19 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.17.0"
+  },
+  "build": {
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    }
   }
 }

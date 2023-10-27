@@ -1,4 +1,4 @@
-export async function getFacts(url) {
+export async function getFacts(url: string) {
   try {
     const res = await fetch(
       url
