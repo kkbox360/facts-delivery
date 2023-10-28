@@ -19,6 +19,9 @@ const useFetchFacts = (
         setFacts(facts);
         callback(facts);
       })
+      .catch((e) => {
+        setFacts([]);
+      })
       .finally(() => {
         setIsLoading(false);
       });

@@ -2,7 +2,7 @@ import Select from '../components/Select';
 import Fact from '../components/Fact';
 import useFetchFacts from '../hooks/useFetchFacts';
 import usePeriodJobs from '../hooks/usePeriodJobs';
-import { saveFavorite } from '../lib/ipc';
+import { saveFavourite } from '../lib/ipc';
 import { notify } from '../lib/notification';
 
 const Home = () => {
@@ -33,8 +33,8 @@ const Home = () => {
     { value: '20000', text: 'Every 20000 minutes' },
   ];
   const { setPeriod } = usePeriodJobs(options[0].value, periodJob);
-  const favoriteHandle = (fact: { id: string; text: string }) => {
-    saveFavorite(fact.id, fact.text);
+  const favouriteHandle = (fact: { id: string; text: string }) => {
+    saveFavourite(fact.id, fact.text);
     forceReload();
   };
   const deleteHandle = forceReload;
@@ -45,9 +45,9 @@ const Home = () => {
       <Fact
         facts={facts}
         isLoading={isLoading}
-        showFavorite
+        showFavourite
         showDelete
-        favoriteHandle={() => favoriteHandle(facts[0])}
+        favouriteHandle={() => favouriteHandle(facts[0])}
         deleteHandle={deleteHandle}
       />
     </div>

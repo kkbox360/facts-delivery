@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const usePeriodJobs = (
-  defaultPeriod: number | string = 5000,
+  defaultPeriod: number | string = 5,
   func: () => void
 ) => {
   const [period, setPeriod] = useState(defaultPeriod);

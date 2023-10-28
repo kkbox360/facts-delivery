@@ -33,29 +33,24 @@ const createWindow = (): void => {
   // mainWindow.webContents.openDevTools();
 
   // TODO: move to another file?
-  ipcMain.handle('save-favorite', (event, factId, text) => {
-    const favorites =
-      (store.get('favorites') as Array<{ id: string; text: string }>) || [];
-    favorites.push({ id: factId, text });
-    store.set('favorites', favorites);
+  ipcMain.handle('save-favourite', (event, factId, text) => {
+    const favourites =
+      (store.get('favourites') as Array<{ id: string; text: string }>) || [];
+    favourites.push({ id: factId, text });
+    store.set('favourites', favourites);
   });
 
-  ipcMain.handle('delete-favorite', (event, factId) => {
-    const favorites = (
-      (store.get('favorites') as Array<{ id: string; text: string }>) || []
+  ipcMain.handle('delete-favourite', (event, factId) => {
+    const favourites = (
+      (store.get('favourites') as Array<{ id: string; text: string }>) || []
     ).filter((fact) => fact.id != factId);
-    store.set('favorites', favorites);
+    store.set('favourites', favourites);
   });
 
-  ipcMain.handle('get-favorite', () => {
-    const favorites =
-      (store.get('favorites') as Array<{ id: string; text: string }>) || [];
-    return favorites;
-  });
-
-  // for test
-  ipcMain.handle('remove-favorite', () => {
-    store.delete('favorites');
+  ipcMain.handle('get-favourite', () => {
+    const favourites =
+      (store.get('favourites') as Array<{ id: string; text: string }>) || [];
+    return favourites;
   });
 };
 

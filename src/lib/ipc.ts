@@ -1,14 +1,14 @@
 const ipcRenderer = window.require('electron').ipcRenderer;
 
-export async function saveFavorite(factId: string, text: string) {
-  ipcRenderer.invoke('save-favorite', factId, text);
+export async function saveFavourite(factId: string, text: string) {
+  ipcRenderer.invoke('save-favourite', factId, text);
 }
 
-export async function deleteFavorite(factId: string) {
-  ipcRenderer.invoke('delete-favorite', factId);
+export async function deleteFavourite(factId: string) {
+  ipcRenderer.invoke('delete-favourite', factId);
 }
 
-export async function getFavorite() {
-  const results = await ipcRenderer.invoke('get-favorite');
+export async function getFavourite() {
+  const results = await ipcRenderer.invoke('get-favourite');
   return results;
 }

@@ -1,13 +1,13 @@
-import { deleteFavorite } from '../lib/ipc';
-import useGetFavorites from '../hooks/useGetFavorites';
+import { deleteFavourite } from '../lib/ipc';
+import useGetFavourites from '../hooks/useGetFavourites';
 import Fact from '../components/Fact';
 
-const Favorite = () => {
-  const { facts, setFacts, isLoading } = useGetFavorites();
+const Favourite = () => {
+  const { facts, setFacts, isLoading } = useGetFavourites();
 
   const deleteHandle = (factId: string) => {
     setFacts(facts.filter((f) => f.id != factId));
-    deleteFavorite(factId);
+    deleteFavourite(factId);
   };
 
   return (
@@ -16,7 +16,7 @@ const Favorite = () => {
         <Fact
           facts={[]}
           isLoading={true}
-          showFavorite={false}
+          showFavourite={false}
           showDelete={false}
         />
       ) : (
@@ -25,7 +25,7 @@ const Favorite = () => {
             key={fact.id}
             facts={[fact]}
             isLoading={false}
-            showFavorite={false}
+            showFavourite={false}
             showDelete
             deleteHandle={() => deleteHandle(fact.id)}
           />
@@ -35,4 +35,4 @@ const Favorite = () => {
   );
 };
 
-export default Favorite;
+export default Favourite;

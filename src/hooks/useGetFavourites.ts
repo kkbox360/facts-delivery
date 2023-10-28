@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { getFavorite } from '../lib/ipc';
+import { getFavourite } from '../lib/ipc';
 
-const useGetFavorites = () => {
+const useGetFavourites = () => {
   const [facts, setFacts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getFavorite()
+    getFavourite()
       .then((facts) => setFacts(facts))
       .finally(() => {
         setIsLoading(false);
@@ -16,4 +16,4 @@ const useGetFavorites = () => {
   return { facts, setFacts, isLoading };
 };
 
-export default useGetFavorites;
+export default useGetFavourites;
